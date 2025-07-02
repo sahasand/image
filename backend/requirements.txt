@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+pydantic
+Pillow
+diffusers
+transformers
+accelerate
+torch
