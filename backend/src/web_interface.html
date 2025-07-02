@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>AI Image Generator</title>
+  </head>
+  <body>
+    <h1>AI Image Generator</h1>
+    <form id="form">
+      <input type="text" id="prompt" placeholder="Enter prompt" size="40" />
+      <button type="submit">Generate</button>
+    </form>
+    <div id="result"></div>
+    <script>
+      const form = document.getElementById('form');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const prompt = document.getElementById('prompt').value;
+        const res = await fetch('/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prompt }),
+        });
+        const data = await res.json();
+        const img = document.createElement('img');
+        img.src = 'data:image/png;base64,' + data.images[0];
+        document.getElementById('result').innerHTML = '';
+        document.getElementById('result').appendChild(img);
+      });
+    </script>
+  </body>
+</html>
+
