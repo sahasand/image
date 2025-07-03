@@ -2,10 +2,13 @@ from __future__ import annotations
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi import Depends, HTTPException
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel
 from typing import Any, Dict, List, Optional
 
 from .image_generator import ImageGenerator
+from ..config import config
 
 app = FastAPI(title="AI Image Generator")
 
@@ -17,6 +20,17 @@ app.add_middleware(
 )
 
 generator = ImageGenerator()
+
+# Authentication dependency
+security = HTTPBearer(auto_error=False)
+
+
+def require_token(credentials: HTTPAuthorizationCredentials = Depends(security)) -> None:
+    token = config.API_TOKEN
+    if token is None:
+        return
+    if credentials is None or credentials.credentials != token:
+        raise HTTPException(status_code=401, detail="Invalid or missing token")
 
 
 class GenerationRequest(BaseModel):
@@ -44,7 +58,7 @@ def health() -> Dict[str, str]:
 
 
 @app.post("/generate", response_model=GenerationResponse)
-def generate(req: GenerationRequest) -> GenerationResponse:
+def generate(req: GenerationRequest, _: None = Depends(require_token)) -> GenerationResponse:
     try:
         result = generator.generate_image(
             prompt=req.prompt,
@@ -62,18 +76,16 @@ def generate(req: GenerationRequest) -> GenerationResponse:
 
 
 @app.get("/models")
-def list_models() -> List[str]:
-    from ..config import config
-
+def list_models(_: None = Depends(require_token)) -> List[str]:
     return list(config.MODELS.keys())
 
 
 @app.get("/models/current")
-def current_model() -> Dict[str, Optional[str]]:
+def current_model(_: None = Depends(require_token)) -> Dict[str, Optional[str]]:
     return {"current_model": generator.current_model}
 
 
 @app.post("/models/switch/{model_name}")
-def switch_model(model_name: str) -> Dict[str, str]:
+def switch_model(model_name: str, _: None = Depends(require_token)) -> Dict[str, str]:
     generator.load_model(model_name)
     return {"status": "loaded", "model": model_name}

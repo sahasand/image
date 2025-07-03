@@ -34,3 +34,18 @@ Open `http://localhost:3000` to access the Next.js frontend.
 
 For full documentation see `CLAUDE.md`.
 
+## Authentication
+
+The API supports optional Bearer token authentication. Set `API_TOKEN` in
+`backend/config/config.py` to enable it:
+
+```python
+API_TOKEN = "mysecrettoken"
+```
+
+Include the token in requests using the `Authorization` header:
+
+```bash
+curl -H "Authorization: Bearer mysecrettoken" http://localhost:8000/health
+```
+
