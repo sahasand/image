@@ -11,6 +11,7 @@ cd backend
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
+export HF_TOKEN=your_hugging_face_token  # if required for model access
 python run_server.py
 ```
 

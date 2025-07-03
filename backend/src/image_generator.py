@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import base64
+import os
 from io import BytesIO
 from pathlib import Path
 from typing import Any, Dict, List, Optional
@@ -24,10 +25,16 @@ class ImageGenerator:
         if cfg is None:
             raise ValueError(f"Unknown model {model_name}")
         torch_dtype = torch.float16 if cfg.torch_dtype == "float16" else torch.float32
+        hf_token = os.environ.get("HF_TOKEN")
+        kwargs = {
+            "revision": cfg.revision,
+            "torch_dtype": torch_dtype,
+        }
+        if hf_token:
+            kwargs["token"] = hf_token
         self.pipeline = StableDiffusionPipeline.from_pretrained(
             cfg.model_id,
-            revision=cfg.revision,
-            torch_dtype=torch_dtype,
+            **kwargs,
         )
         device = config.DEVICE if config.DEVICE != "auto" else (
             "cuda" if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu")
