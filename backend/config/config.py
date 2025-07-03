@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Dict
+from typing import Dict, Optional
 
 @dataclass
 class ModelConfig:
@@ -24,3 +24,7 @@ ENABLE_MEMORY_EFFICIENT_ATTENTION = True
 # API settings
 API_HOST = "0.0.0.0"
 API_PORT = 8000
+
+# Authentication settings
+# Set `API_TOKEN` to a string to enable token-based auth.
+API_TOKEN: Optional[str] = None
