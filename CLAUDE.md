@@ -2,17 +2,17 @@
 
 ## 📋 Project Overview
 
-This is a comprehensive, production-ready AI image generation application built using the latest open-source diffusion models, including **Stable Diffusion 3.5 Large** - the most advanced model available. The system provides both a web interface and REST API for generating high-quality images from text prompts.
+This project demonstrates a basic AI image generator built with open-source diffusion models. Support for newer models such as **Stable Diffusion 3.5 Large** is not yet implemented. The system provides a web interface and REST API for generating images.
 
 ### 🎯 Key Features
-- **Latest AI Model**: **Stable Diffusion 3.5 Large** as default (state-of-the-art)
-- **Multi-Model Support**: SD 3.5 Large, SD XL, SD 1.5, and more
+- **Model**: Stable Diffusion 1.5 *(support for SD 3.5 Large planned)*
+- **Multi-Model Support**: *not yet implemented*
 - **Hardware Optimization**: Native Apple Silicon (MPS), CUDA, and CPU support
-- **Web Interface**: Modern, responsive UI with real-time generation
-- **REST API**: Complete API with OpenAPI documentation
-- **Advanced Features**: ControlNet, image-to-image, inpainting
-- **Performance Optimized**: PyTorch 2.0 optimizations and memory management
-- **Authenticated Access**: Hugging Face integration for gated models
+- **Web Interface**: Modern, responsive UI
+- **REST API**: Basic API for image generation
+- **Advanced Features**: ControlNet, image-to-image, inpainting *(placeholders)*
+- **Performance Optimized**: Basic memory cleanup utilities
+- **Authenticated Access**: *planned*
 
 ## 🏗️ Architecture
 
@@ -39,10 +39,10 @@ backend/
 
 ### Prerequisites
 - Python 3.8+ (3.10+ recommended)
-- **12GB+ RAM (16GB+ recommended for SD 3.5 Large)**
+- 8GB+ RAM recommended
 - GPU with 8GB+ VRAM or Apple Silicon (M1/M2/M3)
-- **15GB+ free disk space** (SD 3.5 Large requires ~12GB)
-- **Hugging Face account** (for SD 3.5 Large access)
+- ~10GB free disk space
+- Hugging Face account *(optional, for gated models)*
 
 ### Quick Setup
 ```bash
@@ -56,7 +56,7 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 # Install dependencies
 pip install -r requirements.txt
 
-# Authenticate with Hugging Face (for SD 3.5 Large)
+# Optional: authenticate with Hugging Face for gated models
 export HF_TOKEN=your_hugging_face_token_here
 
 # Run the application
@@ -339,13 +339,13 @@ spec:
             cpu: "4"
 ```
 
-## 🎨 Advanced Features
+## 🎨 Advanced Features *(placeholders)*
 
-### ControlNet Usage
+### ControlNet Usage *(not implemented)*
 ```python
 from src.advanced_features import AdvancedImageGenerator
 
-# Initialize advanced generator
+# Initialize advanced generator (placeholder class)
 advanced_gen = AdvancedImageGenerator()
 
 # Generate with Canny edge control
@@ -357,9 +357,9 @@ result = advanced_gen.generate_with_controlnet(
 )
 ```
 
-### Image-to-Image
+### Image-to-Image *(not implemented)*
 ```python
-# Transform existing image
+# Transform existing image (placeholder)
 result = advanced_gen.generate_img2img(
     prompt="Transform this into a painting",
     init_image=source_image,
@@ -367,9 +367,9 @@ result = advanced_gen.generate_img2img(
 )
 ```
 
-### Inpainting
+### Inpainting *(not implemented)*
 ```python
-# Fill in masked areas
+# Fill in masked areas (placeholder)
 result = advanced_gen.generate_inpainting(
     prompt="A cat sitting in the garden",
     image=base_image,
@@ -377,11 +377,11 @@ result = advanced_gen.generate_inpainting(
 )
 ```
 
-## 📊 Performance Optimization
+## 📊 Performance Optimization *(experimental)*
 
-### Memory Management
+### Memory Management *(partial)*
 ```python
-from src.performance_optimizer import memory_manager
+from src.performance_optimizer import memory_manager  # placeholder module
 
 # Monitor memory usage
 memory_info = memory_manager.get_memory_info()
@@ -391,9 +391,9 @@ print(f"GPU memory: {memory_info['gpu']['percent']:.1f}%")
 memory_manager.cleanup_memory(force=True)
 ```
 
-### PyTorch 2.0 Optimizations
+### PyTorch 2.0 Optimizations *(not implemented)*
 ```python
-from src.performance_optimizer import pytorch_optimizer
+from src.performance_optimizer import pytorch_optimizer  # placeholder
 
 # Compile model for faster inference
 compiled_pipeline = pytorch_optimizer.optimize_pipeline(
@@ -401,9 +401,9 @@ compiled_pipeline = pytorch_optimizer.optimize_pipeline(
 )
 ```
 
-### Batch Processing
+### Batch Processing *(not implemented)*
 ```python
-from src.performance_optimizer import batch_processor
+from src.performance_optimizer import batch_processor  # placeholder
 
 # Start batch processor
 batch_processor.start_batch_processor()
