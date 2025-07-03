@@ -1,6 +1,6 @@
 # AI Image Generator
 
-This project provides a simple web interface and REST API for generating images using Stable Diffusion models. The repository contains a Next.js frontend and a Python backend implemented with FastAPI.
+This project provides a simple web interface and REST API for generating images using Stable Diffusion models. The current implementation includes only **Stable Diffusion 1.5**. The repository contains a Next.js frontend and a Python backend implemented with FastAPI.
 
 ## Quick Start
 
